@@ -101,10 +101,10 @@ public class ArmSubsystem extends SubsystemBase {
         double ff = feedforward.calculate(setpoint.position, setpoint.velocity);
         double error = controller.calculate(armMotor.getCurrentPosition(), setpoint.position);
 
-        telemetry.addData("Target Position", setpoint.position);
-        telemetry.addData("Target Velocity", setpoint.velocity);
-        telemetry.addData("Actual Position", armMotor.getDistance());
-        telemetry.addData("Actual Velocity", armMotor.getRate());
+        telemetry.addData("Target Position", "%f rad", setpoint.position);
+        telemetry.addData("Target Velocity", "%f rad/s", setpoint.velocity);
+        telemetry.addData("Actual Position", "%f rad", armMotor.getDistance());
+        telemetry.addData("Actual Velocity", "%f rad/s", armMotor.getRate());
         telemetry.addData("Feed Forward", ff);
         telemetry.addData("PID Error", error);
         telemetry.addData("Raw Power", ff + error);

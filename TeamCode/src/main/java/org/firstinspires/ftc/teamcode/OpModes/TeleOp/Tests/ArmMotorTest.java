@@ -36,8 +36,8 @@ public class ArmMotorTest extends OpMode {
             armMotor.stopMotor();
         }
 
-        telemetry.addData("Position", armMotor.getDistance());
-        telemetry.addData("Velocity", armMotor.getRate());
+        telemetry.addData("Position", "%f rad", armMotor.getDistance());
+        telemetry.addData("Velocity", "%f rad/s",armMotor.getRate());
         telemetry.update();
     }
 }
