@@ -90,7 +90,8 @@ public class ArmSubsystem extends SubsystemBase {
 
         motionProfile = new TrapezoidProfile(
                 motionProfileConstraints,
-                new TrapezoidProfile.State(targetState.getVal(), 0)
+                new TrapezoidProfile.State(targetState.getVal(), 0),
+                new TrapezoidProfile.State(getCorrectedDistance(), armMotor.getRate())
         );
 
         timer.reset();
@@ -99,11 +100,11 @@ public class ArmSubsystem extends SubsystemBase {
     public void operateArm() {
         TrapezoidProfile.State setpoint = motionProfile.calculate(timer.seconds());
         double ff = feedforward.calculate(setpoint.position, setpoint.velocity);
-        double error = controller.calculate(armMotor.getCurrentPosition(), setpoint.position);
+        double error = controller.calculate(getCorrectedDistance(), setpoint.position);
 
         telemetry.addData("Target Position", "%f rad", setpoint.position);
         telemetry.addData("Target Velocity", "%f rad/s", setpoint.velocity);
-        telemetry.addData("Actual Position", "%f rad", armMotor.getDistance());
+        telemetry.addData("Actual Position", "%f rad", getCorrectedDistance());
         telemetry.addData("Actual Velocity", "%f rad/s", armMotor.getRate());
         telemetry.addData("Feed Forward", ff);
         telemetry.addData("PID Error", error);
@@ -127,5 +128,9 @@ public class ArmSubsystem extends SubsystemBase {
 
     public void closeServo() {
         armServo.setPosition(1.0);
+    }
+
+    private double getCorrectedDistance() {
+        return armMotor.getDistance() + ArmState.INITIAL.getVal();
     }
 }

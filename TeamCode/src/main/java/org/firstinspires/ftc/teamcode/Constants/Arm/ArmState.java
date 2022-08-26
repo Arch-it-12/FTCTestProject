@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.Constants.Arm;
 
+import org.firstinspires.ftc.teamcode.Constants.MotorConst;
+
 public enum ArmState {
-    BASE(0),
-    UP((Math.PI / 2.0) - 0.3874631),
-    OUT((Math.PI) - 0.3874631);
+    INITIAL(22.2 * (Math.PI / 180)),
+    UP(Math.PI / 2.0),
+    OUT(Math.PI);
 
     private final double val;
 
