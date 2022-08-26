@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Constants;
 
 public enum MotorConst {
     // TODO#1 Tune Max Velocity and Acceleration
+    // Unit: Radians
     ARM(384.5, 2, 0, 0);
 
     private final double TPR;
