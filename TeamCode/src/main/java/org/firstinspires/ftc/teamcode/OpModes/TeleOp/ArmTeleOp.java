@@ -49,7 +49,7 @@ public class ArmTeleOp extends CommandOpMode {
         armSubsystem = new ArmSubsystem(armMotor, armServo, MotorConst.ARM, telemetry);
 
         // Commands
-        armBaseCommand = new ArmMoveCommand(armSubsystem, ArmState.BASE);
+        armBaseCommand = new ArmMoveCommand(armSubsystem, ArmState.INITIAL);
         armUpCommand = new ArmMoveCommand(armSubsystem, ArmState.UP);
         armOutCommand = new ArmMoveCommand(armSubsystem, ArmState.OUT);
 
