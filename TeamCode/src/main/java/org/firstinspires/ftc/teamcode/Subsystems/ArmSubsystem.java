@@ -103,8 +103,8 @@ public class ArmSubsystem extends SubsystemBase {
 
         telemetry.addData("Target Position", setpoint.position);
         telemetry.addData("Target Velocity", setpoint.velocity);
-        telemetry.addData("Actual Position", armMotor.getCurrentPosition());
-        telemetry.addData("Actual Velocity", armMotor.getCorrectedVelocity());
+        telemetry.addData("Actual Position", armMotor.getDistance());
+        telemetry.addData("Actual Velocity", armMotor.getRate());
         telemetry.addData("Feed Forward", ff);
         telemetry.addData("PID Error", error);
         telemetry.addData("Raw Power", ff + error);
