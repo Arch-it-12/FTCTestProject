@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystems;
+package org.firstinspires.ftc.teamcode.subsystems;
 
 import androidx.annotation.NonNull;
 
@@ -12,9 +12,14 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Constants.Arm.ArmState;
-import org.firstinspires.ftc.teamcode.Constants.MotorConst;
+import org.firstinspires.ftc.teamcode.constants.arm.ArmState;
+import org.firstinspires.ftc.teamcode.constants.MotorConst;
 
+/**
+ * A wrapper for the arm motor and servo subsystem
+ *
+ * @author Archit A.
+ */
 @Config
 public class ArmSubsystem extends SubsystemBase {
 
@@ -47,6 +52,13 @@ public class ArmSubsystem extends SubsystemBase {
     // Motion profile
     private TrapezoidProfile motionProfile;
 
+    /**
+     * Creates a new ArmSubsystem along with their associated controllers
+     * @param armMotor the {@link Motor} object for the physical arm motor
+     * @param armServo the {@link Servo} object for the physical arm servo
+     * @param motorConst the {@link MotorConst} object containing the motor's constants for motion profiling
+     * @param telemetry the {@link Telemetry} object for console logging
+     */
     public ArmSubsystem(Motor armMotor, Servo armServo, @NonNull MotorConst motorConst, Telemetry telemetry) {
         this.telemetry = telemetry;
         this.armMotor = armMotor;
@@ -83,6 +95,10 @@ public class ArmSubsystem extends SubsystemBase {
         this.armMotor.resetEncoder();
     }
 
+    /**
+     * Creates a new motion profile and initiates the control loop for movement of the arm
+     * @param targetState the desired goal {@link ArmState}
+     */
     public void setArmState(@NonNull ArmState targetState) {
         // TODO For Realtime PID and FF Tuning
         controller.setPID(P, I, D);
@@ -97,6 +113,9 @@ public class ArmSubsystem extends SubsystemBase {
         timer.reset();
     }
 
+    /**
+     * Runs one iteration of the control loop, including motion profiling, feed forward, and feedback
+     */
     public void operateArm() {
         TrapezoidProfile.State setpoint = motionProfile.calculate(timer.seconds());
         double ff = feedforward.calculate(setpoint.position, setpoint.velocity);
@@ -114,22 +133,41 @@ public class ArmSubsystem extends SubsystemBase {
         armMotor.set(error + ff);
     }
 
+    /**
+     * Stops the arm's motor
+     */
     public void stopArm() {
         armMotor.stopMotor();
     }
 
+    /**
+     * Determines whether or not the motion profile is complete
+     * @return the completion state of the motion profile
+     */
     public boolean isProfileFinished() {
-        return motionProfile.isFinished(timer.seconds());
+//        return motionProfile.isFinished(timer.seconds());
+        // TODO Tune kS and kCos
+        return false;
     }
 
+    /**
+     * Moves the servo to its leftmost position
+     */
     public void openServo() {
         armServo.setPosition(0.0);
     }
 
+    /**
+     * Moves te servo to its rightmost position
+     */
     public void closeServo() {
         armServo.setPosition(1.0);
     }
 
+    /**
+     * Returns the encoder's position corrected for the starting position
+     * @return the absolute position of the arm in radians
+     */
     private double getCorrectedDistance() {
         return armMotor.getDistance() + ArmState.INITIAL.getVal();
     }

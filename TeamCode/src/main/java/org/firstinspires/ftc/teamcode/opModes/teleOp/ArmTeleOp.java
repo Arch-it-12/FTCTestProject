@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.OpModes.TeleOp;
+package org.firstinspires.ftc.teamcode.opModes.teleOp;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
@@ -10,14 +10,18 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.Commands.ArmMoveCommand;
-import org.firstinspires.ftc.teamcode.Constants.Arm.ArmState;
-import org.firstinspires.ftc.teamcode.Constants.MotorConst;
-import org.firstinspires.ftc.teamcode.Subsystems.ArmSubsystem;
+import org.firstinspires.ftc.teamcode.commands.ArmMoveCommand;
+import org.firstinspires.ftc.teamcode.constants.MotorConst;
+import org.firstinspires.ftc.teamcode.constants.arm.ArmState;
+import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 
-// Fully functioning TeleOp for Arm ONLY
-
+/**
+ * Fully functioning TeleOp for Arm ONLY
+ *
+ * @author Archit A.
+ */
 @TeleOp(name = "Arm Only")
+@SuppressWarnings("FieldCanBeLocal")
 public class ArmTeleOp extends CommandOpMode {
 
     // Hardware
@@ -28,13 +32,10 @@ public class ArmTeleOp extends CommandOpMode {
     private ArmSubsystem armSubsystem;
 
     // Commands
-    private ArmMoveCommand armBaseCommand;
-    private ArmMoveCommand armUpCommand;
-    private ArmMoveCommand armOutCommand;
+    private ArmMoveCommand armInitialCommand, armUpCommand, armOutCommand;
 
     // Gamepads
-    private GamepadEx driver;
-    private GamepadEx operator;
+    private GamepadEx driver, operator;
 
     @Override
     public void initialize() {
@@ -49,7 +50,7 @@ public class ArmTeleOp extends CommandOpMode {
         armSubsystem = new ArmSubsystem(armMotor, armServo, MotorConst.ARM, telemetry);
 
         // Commands
-        armBaseCommand = new ArmMoveCommand(armSubsystem, ArmState.INITIAL);
+        armInitialCommand = new ArmMoveCommand(armSubsystem, ArmState.INITIAL);
         armUpCommand = new ArmMoveCommand(armSubsystem, ArmState.UP);
         armOutCommand = new ArmMoveCommand(armSubsystem, ArmState.OUT);
 
@@ -58,7 +59,7 @@ public class ArmTeleOp extends CommandOpMode {
         operator = new GamepadEx(gamepad2);
 
         // Button Binds
-        driver.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed(armBaseCommand);
+        driver.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed(armInitialCommand);
         driver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(armUpCommand);
         driver.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenPressed(armOutCommand);
 
