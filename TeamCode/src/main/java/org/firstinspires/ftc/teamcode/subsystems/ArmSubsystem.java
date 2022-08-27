@@ -24,13 +24,13 @@ import org.firstinspires.ftc.teamcode.constants.MotorConfig;
 public class ArmSubsystem extends SubsystemBase {
 
     // Dashboard Constants
-    public static double kS;
-    public static double kCos;
-    public static double kV;
+    public static double kS = 0;
+    public static double kCos = 0;
+    public static double kV = 0;
 
-    public static double P;
-    public static double I;
-    public static double D;
+    public static double P = 0;
+    public static double I = 0;
+    public static double D = 0;
 
     // Telemetry
     private final Telemetry telemetry;
