@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.constants.arm.ArmState;
-import org.firstinspires.ftc.teamcode.constants.MotorConst;
+import org.firstinspires.ftc.teamcode.constants.MotorConfig;
 
 /**
  * A wrapper for the arm motor and servo subsystem
@@ -56,15 +56,15 @@ public class ArmSubsystem extends SubsystemBase {
      * Creates a new ArmSubsystem along with their associated controllers
      * @param armMotor the {@link Motor} object for the physical arm motor
      * @param armServo the {@link Servo} object for the physical arm servo
-     * @param motorConst the {@link MotorConst} object containing the motor's constants for motion profiling
+     * @param motorConfig the {@link MotorConfig} object containing the motor's constants for motion profiling
      * @param telemetry the {@link Telemetry} object for console logging
      */
-    public ArmSubsystem(Motor armMotor, Servo armServo, @NonNull MotorConst motorConst, Telemetry telemetry) {
+    public ArmSubsystem(Motor armMotor, Servo armServo, @NonNull MotorConfig motorConfig, Telemetry telemetry) {
         this.telemetry = telemetry;
         this.armMotor = armMotor;
         this.armServo = armServo;
 
-        this.armMotor.setDistancePerPulse((motorConst.getTPR() * motorConst.getGearRatio()) / (2 * Math.PI));
+        this.armMotor.setDistancePerPulse((motorConfig.getTPR() * motorConfig.getGearRatio()) / (2 * Math.PI));
 
 //        this.controller = new PIDController(
 //                ArmPID.P.getVal(),
@@ -85,8 +85,8 @@ public class ArmSubsystem extends SubsystemBase {
         this.feedforward = new ArmFeedforward(kS, kCos, kV);
 
         this.motionProfileConstraints = new TrapezoidProfile.Constraints(
-                motorConst.getMaxVel(),
-                motorConst.getMaxAcc()
+                motorConfig.getMaxVel(),
+                motorConfig.getMaxAcc()
         );
 
         this.armMotor.setInverted(true);

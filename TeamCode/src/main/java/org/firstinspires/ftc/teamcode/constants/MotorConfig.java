@@ -4,7 +4,7 @@ package org.firstinspires.ftc.teamcode.constants;
  * Constants used in motion profiling for the various motors in the robot
  * @author Archit A.
  */
-public enum MotorConst {
+public enum MotorConfig {
     // TODO#1 Tune Max Velocity and Acceleration
     /**
      * Arm motor; Unit: RADIANS
@@ -28,7 +28,7 @@ public enum MotorConst {
      */
     private final double maxAcc;
 
-    MotorConst(double TPR, double gearRatio, double maxVel, double maxAcc) {
+    MotorConfig(double TPR, double gearRatio, double maxVel, double maxAcc) {
         this.TPR = TPR;
         this.gearRatio = gearRatio;
         this.maxVel = maxVel;

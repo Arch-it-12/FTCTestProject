@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.constants.DeviceConfig;
-import org.firstinspires.ftc.teamcode.constants.MotorConst;
+import org.firstinspires.ftc.teamcode.constants.MotorConfig;
 import org.firstinspires.ftc.teamcode.constants.arm.ArmState;
 
 /**
@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.constants.arm.ArmState;
 public class ArmPosTest extends OpMode {
 
     // Constants
-    private final double dpp = (MotorConst.ARM.getTPR() * MotorConst.ARM.getGearRatio()) / (2 * Math.PI);
+    private final double dpp = (MotorConfig.ARM.getTPR() * MotorConfig.ARM.getGearRatio()) / (2 * Math.PI);
 
     // Hardware
     private Motor armMotor;

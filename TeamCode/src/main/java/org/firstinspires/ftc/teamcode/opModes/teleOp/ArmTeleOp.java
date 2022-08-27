@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.commands.ArmMoveCommand;
 import org.firstinspires.ftc.teamcode.constants.DeviceConfig;
-import org.firstinspires.ftc.teamcode.constants.MotorConst;
+import org.firstinspires.ftc.teamcode.constants.MotorConfig;
 import org.firstinspires.ftc.teamcode.constants.arm.ArmState;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
 
@@ -48,7 +48,7 @@ public class ArmTeleOp extends CommandOpMode {
         armServo = hardwareMap.get(Servo.class, DeviceConfig.ARM_SERVO.getName());
 
         // Subsystems
-        armSubsystem = new ArmSubsystem(armMotor, armServo, MotorConst.ARM, telemetry);
+        armSubsystem = new ArmSubsystem(armMotor, armServo, MotorConfig.ARM, telemetry);
 
         // Commands
         armInitialCommand = new ArmMoveCommand(armSubsystem, ArmState.INITIAL);
