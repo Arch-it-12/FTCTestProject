@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.commands.ArmMoveCommand;
+import org.firstinspires.ftc.teamcode.constants.DeviceConfig;
 import org.firstinspires.ftc.teamcode.constants.MotorConst;
 import org.firstinspires.ftc.teamcode.constants.arm.ArmState;
 import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
@@ -43,8 +44,8 @@ public class ArmTeleOp extends CommandOpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         // Hardware
-        armMotor = hardwareMap.get(Motor.class, "arm motor");
-        armServo = hardwareMap.get(Servo.class, "arm servo");
+        armMotor = hardwareMap.get(Motor.class, DeviceConfig.ARM_MOTOR.getName());
+        armServo = hardwareMap.get(Servo.class, DeviceConfig.ARM_SERVO.getName());
 
         // Subsystems
         armSubsystem = new ArmSubsystem(armMotor, armServo, MotorConst.ARM, telemetry);

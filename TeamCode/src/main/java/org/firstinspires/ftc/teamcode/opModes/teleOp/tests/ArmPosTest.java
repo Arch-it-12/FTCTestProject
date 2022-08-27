@@ -6,6 +6,7 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.constants.DeviceConfig;
 import org.firstinspires.ftc.teamcode.constants.MotorConst;
 import org.firstinspires.ftc.teamcode.constants.arm.ArmState;
 
@@ -33,7 +34,7 @@ public class ArmPosTest extends OpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         // Hardware
-        armMotor = hardwareMap.get(Motor.class, "arm motor");
+        armMotor = hardwareMap.get(Motor.class, DeviceConfig.ARM_MOTOR.getName());
 
         // Init stuff
         armMotor.setInverted(true);
