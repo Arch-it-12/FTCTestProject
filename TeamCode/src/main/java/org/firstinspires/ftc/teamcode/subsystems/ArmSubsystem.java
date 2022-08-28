@@ -146,7 +146,7 @@ public class ArmSubsystem extends SubsystemBase {
      */
     public boolean isProfileFinished() {
 //        return motionProfile.isFinished(timer.seconds());
-        // TODO Tune kS and kCos
+        // TODO#0 Tune kS and kCos
         return false;
     }
 
